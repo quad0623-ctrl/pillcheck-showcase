@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PillCheck · 사진 한 장으로 알약 확인</title>
+<meta name="description" content="사진 한 장으로 여러 알약을 찾아 이름을 알려 주고, 함께 먹으면 안 되는 약을 쉬운 말로 알려 주는 AI 서비스. 계명대 D5 청년인재 혁신아카데미 ABB 과정 SD팀.">
+<meta property="og:title" content="PillCheck — 이 알약, 무슨 약이지?">
+<meta property="og:description" content="사진 한 장으로 여러 알약 확인 · 병용금기 안내 · 계명대 D5 ABB 과정 SD팀">
+<meta property="og:image" content="assets/poster_preview.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg transform='rotate(-38 60 60)'%3E%3Crect x='14' y='38' width='92' height='44' rx='22' fill='%23fff' stroke='%231d4fe0' stroke-width='6'/%3E%3Cpath d='M60 38h24a22 22 0 0 1 0 44H60z' fill='%231d4fe0'/%3E%3C/g%3E%3Ccircle cx='88' cy='88' r='25' fill='%2314c3a4'/%3E%3Cpath d='M76 88l8 8 15-16' fill='none' stroke='%23fff' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --blue:#1d4fe0;--blue-d:#163bb0;--navy:#0e1a3d;--ink:#2a3554;--muted:#5d6a88;
+  --bg:#f3f7ff;--card:#fff;--tint:#eaf1ff;--line:#d6e2fb;--teal:#14c3a4;--yellow:#fff06a;
+  --red:#d9363e;--amber:#b86a0a;--green:#147a4b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+mark{background:linear-gradient(transparent 55%,var(--yellow) 55%);color:inherit;font-weight:700}
+h2{font-size:clamp(24px,4.5vw,34px);color:var(--navy);letter-spacing:-.5px;line-height:1.25;margin-bottom:8px}
+.kicker{font-size:14px;font-weight:700;color:var(--blue);letter-spacing:.5px;margin-bottom:6px}
+.lead{color:var(--muted);font-size:16px;margin-bottom:24px}
+section{padding:56px 0}
+.card{background:var(--card);border-radius:20px;box-shadow:0 8px 28px rgba(29,79,224,.08)}
+
+/* hero */
+.hero{background:linear-gradient(160deg,#ffffff 0%,#e9f0ff 55%,#d4e3ff 100%);padding:28px 0 56px}
+.nav{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--navy);font-size:18px}
+.brand svg{width:30px;height:30px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;margin-top:36px}
+.q{font-size:clamp(20px,3.6vw,28px);font-weight:700;color:var(--navy)}
+.q em{font-style:normal;color:var(--blue)}
+.logo{font-size:clamp(56px,11vw,104px);font-weight:900;letter-spacing:-3px;line-height:1;margin:8px 0 6px;
+  background:linear-gradient(100deg,#1236b8,#1d4fe0 55%,#2f7bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:17px;color:var(--muted)}
+.sub b{color:var(--blue)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;border-radius:14px;padding:14px 22px;font-size:17px}
+.btn.primary{background:var(--blue);color:#fff;box-shadow:0 10px 24px rgba(29,79,224,.3)}
+.btn.primary .dot{width:10px;height:10px;border-radius:50%;background:#ff5a62;box-shadow:0 0 0 4px rgba(255,90,98,.25)}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--line)}
+.stats{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.stat{background:#fff;border-radius:14px;padding:10px 16px;box-shadow:0 6px 18px rgba(29,79,224,.08)}
+.stat b{display:block;font-size:24px;color:var(--blue);font-weight:900;line-height:1.2}
+.stat span{font-size:13px;color:var(--muted)}
+.phones{display:flex;gap:14px;justify-content:center}
+.phone{width:46%;max-width:220px;background:#0d0f14;border-radius:30px;padding:7px;box-shadow:0 20px 40px rgba(14,26,61,.25)}
+.phone img{display:block;width:100%;border-radius:24px}
+.phone:nth-child(2){transform:translateY(24px)}
+
+/* problems */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.prob{padding:20px}
+.prob b{display:block;font-size:18px;color:var(--navy);margin-bottom:4px}
+.prob p{font-size:15px;color:var(--muted)}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:s}
+.step{padding:18px;position:relative}
+.step::before{counter-increment:s;content:counter(s);display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;align-items:center;justify-content:center;margin-bottom:8px}
+.step b{display:block;color:var(--navy);font-size:17px}
+.step p{font-size:14px;color:var(--muted)}
+.lanes{margin-top:16px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.lane{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center}
+.lane .pill{height:56px;border-radius:12px;background:#22262e;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.lane .pill img{max-width:68px;max-height:50px}
+.res{font-weight:800;font-size:16px}
+.ev{font-size:13px;color:var(--muted)}
+.rule{margin-top:14px;background:var(--navy);color:#fff;border-radius:14px;padding:14px 18px;font-size:15px}
+.rule b{color:var(--yellow)}
+
+/* dur */
+.dur{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dur .card{padding:20px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips span{background:var(--tint);color:var(--blue-d);border-radius:8px;padding:3px 10px;font-size:14px;font-weight:600}
+.chips span.hot{background:#ffe9ea;color:var(--red)}
+.plain{margin-top:10px;background:#fff3f3;border:1.5px solid #f6c5c7;border-radius:12px;padding:12px 14px;color:#5b1d20}
+.plain i{font-style:normal;font-weight:800;color:var(--red)}
+.note{margin-top:14px;font-size:15px}
+
+/* compare */
+.tbl{overflow-x:auto;padding:6px 10px}
+table{width:100%;border-collapse:collapse;min-width:560px;font-size:15px}
+th,td{padding:12px 8px;text-align:center;border-bottom:1px solid #edf1fa}
+thead th{font-size:13px;color:var(--blue-d)}
+tbody th{text-align:left;color:var(--navy);font-weight:700}
+td.no{color:#a3adc2}td.tri{color:var(--amber);font-weight:800}td.part{color:var(--green);font-weight:700}
+.pc{background:var(--tint);color:var(--blue);font-weight:900;font-size:18px}
+thead .pc{background:var(--blue);color:#fff;border-radius:10px 10px 0 0}
+.small{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* model + perf */
+.models{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.models span{background:#fff;border-radius:10px;padding:6px 12px;font-weight:700;color:var(--navy);box-shadow:0 4px 12px rgba(29,79,224,.06);font-size:15px}
+.models span i{font-style:normal;color:var(--muted);font-weight:500;margin-left:4px}
+.honest{background:#fff8c9;border:1.5px solid #f0dc6a;border-radius:12px;padding:10px 14px;font-size:15px;margin-bottom:14px}
+.perf{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pf{padding:16px}
+.pf .k{font-size:14px;color:var(--muted)}
+.pf .k b{color:var(--navy)}
+.pf .v{font-size:32px;font-weight:900;color:var(--blue);line-height:1.2}
+.pf.dark{background:var(--navy)}.pf.dark .k,.pf.dark .k b{color:#cfd9f2}.pf.dark .v{color:#fff}
+
+/* team */
+.team{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mem{padding:22px;display:flex;gap:16px;align-items:flex-start}
+.av{width:56px;height:56px;border-radius:16px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px;background:linear-gradient(135deg,#2f7bff,#1236b8)}
+.av.t{background:linear-gradient(135deg,#2fd9b9,#0c9a80)}
+.mem h3{font-size:20px;color:var(--navy);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.role{font-size:12px;background:var(--teal);color:#06231d;border-radius:999px;padding:2px 10px;font-weight:800}
+.mem p{font-size:15px;color:var(--muted);margin:4px 0 8px}
+.gh{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none;font-size:15px}
+.gh svg{width:18px;height:18px}
+
+/* poster + footer */
+.poster{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:center}
+.poster img{width:100%;border-radius:12px;box-shadow:0 12px 30px rgba(14,26,61,.18)}
+footer{padding:36px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer p+p{margin-top:6px}
+
+@media (max-width:760px){
+  section{padding:40px 0}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .phones{order:2}
+  .grid3,.dur,.team{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+  .perf{grid-template-columns:1fr 1fr}
+  .poster{grid-template-columns:1fr}
+  .poster img{max-width:300px;margin:0 auto;display:block}
+  .btn{flex:1 1 100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand"><svg viewBox="0 0 120 120" aria-hidden="true"><g transform="rotate(-38 60 60)"><rect x="14" y="38" width="92" height="44" rx="22" fill="#fff" stroke="#1d4fe0" stroke-width="6"/><path d="M60 38h24a22 22 0 0 1 0 44H60z" fill="#1d4fe0"/></g><circle cx="88" cy="88" r="25" fill="#14c3a4" stroke="#fff" stroke-width="5"/><path d="M76 88l8 8 15-16" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>PillCheck</div>
+      <span>계명대 D5 ABB 과정 · SD팀</span>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <p class="q">이 알약, <em>무슨 약이지?</em> 같이 먹어도 될까?</p>
+        <h1 class="logo">PillCheck</h1>
+        <p class="sub"><b>필체크</b> · 사진 한 장으로 여러 알약을 한 번에 확인합니다</p>
+        <div class="cta">
+          <a class="btn primary" href="https://desktop-uv0oi23.tail58aa66.ts.net/ui" target="_blank" rel="noopener"><span class="dot"></span>라이브 데모 열기</a>
+          <a class="btn ghost" href="#team">만든 사람들</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>4,519종</b><span>사진만으로 바로 알아보는 약</span></div>
+          <div class="stat"><b>25,000여 종</b><span>알약 글자·모양·색으로 찾는 약</span></div>
+        </div>
+      </div>
+      <div class="phones">
+        <div class="phone"><img src="assets/screen_scan.jpg" alt="촬영 화면: 알약 3개를 찾아 번호를 붙인 모습"></div>
+        <div class="phone"><img src="assets/screen_result.jpg" alt="결과 화면: 확인됨, 불확실, 병용금기 안내"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <p class="kicker">WHY</p>
+    <h2>왜 만들었나요</h2>
+    <p class="lead">휴대폰으로 알약을 찍으면 PillCheck가 사진 속 알약을 하나하나 찾아 이름을 알려 주고, <mark>함께 먹으면 안 되는 약</mark>이 있는지 쉬운 말로 알려 줍니다.</p>
+    <div class="grid3">
+      <div class="card prob"><b>정체 모를 낱알</b><p>봉투에서 꺼낸 알약은 무슨 약인지 알기 어렵습니다.</p></div>
+      <div class="card prob"><b>여러 약 함께 복용</b><p>약을 여러 개 드시는 어르신은 같이 먹어도 되는지 알기 어렵습니다.</p></div>
+      <div class="card prob"><b>이름을 알아야 조회</b><p>기존 의약품 안전 조회(DUR)는 약 이름을 알아야 쓸 수 있습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff">
+  <div class="wrap">
+    <p class="kicker">HOW</p>
+    <h2>사진 한 장이 결과가 되기까지</h2>
+    <p class="lead">알약 하나에 1~1.5초. 확실할 때만 이름을 알려 줍니다.</p>
+    <div class="flow">
+      <div class="card step"><b>찍는다</b><p>여러 알약을 한 장에</p></div>
+      <div class="card step"><b>찾는다</b><p>알약마다 위치를 찾아 번호를 붙임</p></div>
+      <div class="card step"><b>판별한다</b><p>AI 2종 · 글자 판독 · 식약처 목록을 서로 맞춰 봄</p></div>
+      <div class="card step"><b>알려 준다</b><p>병용금기 등 주의사항을 쉬운 말로</p></div>
+    </div>
+    <div class="card lanes">
+      <div class="lane"><div class="pill"><img src="assets/pill_tylenol.png" alt=""></div><div><div class="res" style="color:var(--green)">✓ 확인됨 · 타이레놀정500mg</div><div class="ev">각인 TYLENOL · 근거 2개 이상 일치</div></div></div>
+      <div class="lane"><div class="pill"><img src="assets/pill_az.png" alt=""></div><div><div class="res" style="color:var(--amber)">? 불확실 · 반대쪽 면을 찍어 주세요</div><div class="ev">각인 AZ · 약품 2개 일치</div></div></div>
+      <div class="lane"><div class="pill"><img src="assets/pill_br4.png" alt=""></div><div><div class="res" style="color:var(--red)">✓ 확인됨 · 부루펜정400mg · 병용금기 2건</div><div class="ev">각인 BR4 · 근거 2개 이상 일치</div></div></div>
+    </div>
+    <p class="rule">AI 2종, 글자 판독, 식약처 목록 중 <b>2가지 이상이 같은 약을 가리킬 때만 ‘확인됨’</b>. 확실하지 않으면 추측하지 않고 다시 찍어 달라고 안내합니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">SAFETY</p>
+    <h2>함께 먹어도 될까?</h2>
+    <p class="lead">식약처 DUR(의약품 안전 사용 서비스)과 연동해, 어려운 원문을 한두 문장으로 바꿔 알려 줍니다.</p>
+    <div class="dur">
+      <div class="card"><b style="color:var(--navy)">식약처 DUR 8개 항목 조회</b>
+        <div class="chips"><span class="hot">병용금기</span><span>특정연령대금기</span><span>임부금기</span><span>용량주의</span><span>투여기간주의</span><span>노인주의</span><span>효능군중복</span><span>서방정분할</span></div>
+        <p class="small">병용금기는 A약→B약, B약→A약 양쪽 모두 확인합니다.</p></div>
+      <div class="card"><b style="color:var(--navy)">원문 40줄 → 쉬운 말 1문장</b>
+        <div class="plain"><i>● 병용금기</i> 메토트렉세이트와 함께 드시면 혈액 관련 부작용 위험이 커질 수 있어요.</div></div>
+    </div>
+    <p class="note">조회 결과가 없으면 ‘안전합니다’ 대신 <mark>‘등록된 주의사항이 없습니다’</mark>로 안내합니다.</p>
+  </div>
+</section>
+
+<section style="background:#fff">
+  <div class="wrap">
+    <p class="kicker">COMPARE</p>
+    <h2>기존 앱과 무엇이 다를까?</h2>
+    <div class="card tbl">
+      <table>
+        <thead><tr><th></th><th>알약 스**너</th><th>이게*약</th><th>스마트D**</th><th>오픈소스 YOLO</th><th class="pc">PillCheck</th></tr></thead>
+        <tbody>
+          <tr><th>여러 알약 한 번에</th><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="tri">△</td><td class="pc">✓</td></tr>
+          <tr><th>알약 글자(각인) 판독</th><td class="no">—</td><td class="tri">△</td><td class="no">—</td><td class="no">—</td><td class="pc">✓</td></tr>
+          <tr><th>실시간 병용금기(DUR)</th><td class="tri">△</td><td class="no">—</td><td class="part">✓ 직접 입력</td><td class="no">—</td><td class="pc">✓</td></tr>
+          <tr><th>쉬운 말 설명</th><td class="no">—</td><td class="tri">△</td><td class="no">—</td><td class="no">—</td><td class="pc">✓</td></tr>
+          <tr><th>불확실하면 판정 보류</th><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="pc">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small">✓ 있음 · △ 일부 · — 없음 · 2026년 9월 팀 자체 조사</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">TECH</p>
+    <h2>직접 만든 AI 모델</h2>
+    <p class="lead">AI Hub 경구약제 사진 약 261만 장으로 Elice Cloud A100 80GB × 2에서 학습했습니다.</p>
+    <div class="models">
+      <span>PillNet <i>알약 찾기</i></span>
+      <span>CNN16 + EfficientNet-B0 <i>약 맞히기</i></span>
+      <span>각인 OCR 2종 <i>글자 읽기</i></span>
+      <span>투표 · 목록 검색 <i>최종 판단</i></span>
+      <span>식약처 DUR API <i>복용 안전</i></span>
+    </div>
+    <p class="honest">학습에 쓰지 않은 AI Hub 촬영 사진으로 평가했습니다 · <b>실제 휴대폰 사진 성능은 검증 중</b>입니다.</p>
+    <div class="perf">
+      <div class="card pf"><div class="k"><b>알약 찾기</b> · mAP50</div><div class="v">0.985</div></div>
+      <div class="card pf"><div class="k"><b>약 맞히기</b> · CNN16 Top-1</div><div class="v">99.99%</div></div>
+      <div class="card pf"><div class="k"><b>약 맞히기</b> · EfficientNet Top-1</div><div class="v">99.86%</div></div>
+      <div class="card pf"><div class="k"><b>글자 읽기</b> · 어텐션 완전 일치</div><div class="v">99.5%</div></div>
+      <div class="card pf"><div class="k"><b>글자 읽기</b> · CTC 완전 일치</div><div class="v">97.4%</div></div>
+      <div class="card pf dark"><div class="k"><b>처리 속도</b> · 알약 하나, RTX 2060</div><div class="v">1~1.5초</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="team" style="background:#fff">
+  <div class="wrap">
+    <p class="kicker">TEAM</p>
+    <h2>만든 사람들</h2>
+    <p class="lead">계명대학교 D5 청년인재 혁신아카데미 ABB 과정 · SD팀</p>
+    <div class="team">
+      <div class="card mem"><div class="av">D</div><div>
+        <h3>Dagmawe <span class="role">AI 엔진</span></h3>
+        <p>모델 설계·학습 → 앱 연동·추론 서버</p>
+        <a class="gh" href="https://github.com/Dagim7" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>github.com/Dagim7</a>
+      </div></div>
+      <div class="card mem"><div class="av t">유</div><div>
+        <h3>유시안 <span class="role">플랫폼 · 프로덕트</span></h3>
+        <p>학습 인프라 → 앱 개발·디자인·배포</p>
+        <a class="gh" href="https://github.com/quad0623-ctrl" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>github.com/quad0623-ctrl</a>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap poster">
+    <a href="assets/PillCheck_poster_960x1680.pdf" target="_blank" rel="noopener"><img src="assets/poster_preview.jpg" alt="PillCheck 전시 포스터 미리보기"></a>
+    <div>
+      <p class="kicker">EXHIBITION</p>
+      <h2>2026 대구·경북 초광역 이음 모빌리티 취업박람회</h2>
+      <p class="lead">2026년 10월 21일 · EXCO 서관 3층 그랜드볼룸 부스 전시</p>
+      <p>작은 물체를 찾고 글자를 읽는 이 기술은 <mark>부품 외관 검사·각인 판독</mark> 같은 제조 품질 검사에도 쓸 수 있습니다.</p>
+      <div class="cta"><a class="btn ghost" href="assets/PillCheck_poster_960x1680.pdf" target="_blank" rel="noopener">포스터 PDF 보기</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>PillCheck는 약을 확인하는 데 도움을 주는 참고용 서비스이며, 의사·약사의 진료나 상담을 대신하지 않습니다. 복용 전에는 포장과 설명서를 함께 확인하세요.</p>
+    <p>© 2026 SD팀 · 계명대학교 D5 청년인재 혁신아카데미 ABB 과정</p>
+  </div>
+</footer>
+</body>
+</html>
