@@ -154,6 +154,31 @@ footer p+p{margin-top:6px}
 .lessons b{display:block;color:var(--navy);margin-bottom:4px}
 .lessons p{font-size:14px;color:var(--muted)}
 @media (max-width:760px){.lessons{grid-template-columns:1fr}}
+
+/* ai */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.split .card{padding:20px}
+.split h3{font-size:17px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.split ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.split li{font-size:15px;padding-left:18px;position:relative}
+.split li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.split .ai li::before{background:var(--teal)}
+.tag{font-size:12px;border-radius:999px;padding:2px 10px;font-weight:800}
+.tag.h{background:var(--tint);color:var(--blue-d)}.tag.a{background:#d9f6ef;color:#0c7a66}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tools .card{padding:16px}
+.tools b{display:block;color:var(--navy)}
+.tools span{font-size:13px;font-weight:700;color:var(--blue)}
+.tools p{font-size:14px;color:var(--muted);margin-top:4px}
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ways .card{padding:18px}
+.ways b{display:block;color:var(--navy);font-size:16px;margin-bottom:4px}
+.ways p{font-size:14px;color:var(--ink)}
+.bars{padding:18px;margin-top:14px}
+.bar{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;font-size:14px;margin:6px 0}
+.bar i{display:block;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--blue),#5b8cff)}
+.bar em{font-style:normal;color:var(--muted);text-align:right}
+@media (max-width:760px){.split,.tools,.ways{grid-template-columns:1fr}.bar{grid-template-columns:110px 1fr 40px}}
 </style>
 </head>
 <body>
@@ -313,7 +338,43 @@ footer p+p{margin-top:6px}
   </div>
 </section>
 
-<section id="team">
+<section id="ai">
+  <div class="wrap">
+    <p class="kicker">AI × TEAM</p>
+    <h2>AI와 함께 일한 방식</h2>
+    <p class="lead">둘이서 4개월 만에 30종 실험에서 4,519종 앱까지 올 수 있었던 데는 AI 코딩 도구의 힘이 컸습니다. 코드와 문서는 AI가 초안을 많이 썼지만, <mark>무엇을 할지 정하고 결과를 검증하는 일은 사람이</mark> 했습니다.</p>
+    <div class="split">
+      <div class="card"><h3><span class="tag h">사람</span>정하고 검증한 것</h3><ul>
+        <li>주제, 약 30종 선정, 클라우드 GPU 선택, 무료·공익 방향</li>
+        <li>99.97%가 진짜인지 의심하고 평가 방식을 다시 설계</li>
+        <li>자체 CNN 개선과 각인 판독으로 가는 모델 방향</li>
+        <li>화면 구성, 점수 표시 같은 디자인 결정 (AI 추천과 다르게 고른 것도 있음)</li>
+        <li>파일 삭제처럼 되돌리기 어려운 작업은 직접 승인</li>
+      </ul></div>
+      <div class="card ai"><h3><span class="tag a">AI</span>도움을 받은 것</h3><ul>
+        <li>데이터 검증·전처리 스크립트, 학습 노트북 코드</li>
+        <li>오류 로그를 붙여 넣으며 하는 디버깅 (클라우드, 학습, 빌드)</li>
+        <li>Flutter 앱 코드, 테스트, APK·AAB 빌드</li>
+        <li>보고서, 앱 점검 보고서, 발표 예상 질문, 스토어 정책 답변 초안</li>
+        <li>팀원을 위한 번역과 다국어 문서</li>
+      </ul></div>
+    </div>
+    <div class="tools">
+      <div class="card"><span>8월 ~ 9월</span><b>Cursor (Agent·Plan 모드)</b><p>데이터 확보·검증, 전처리, 모델 학습, 첫 Flutter 앱과 Play 제출 준비</p></div>
+      <div class="card"><span>10월</span><b>Claude Code</b><p>앱 화면 개편과 테스트, 코드 점검 보고서, 발표 준비, 전시 포스터와 이 페이지</p></div>
+      <div class="card"><span>서버 쪽</span><b>팀원의 LLM</b><p>요청서를 서버 PC의 LLM에 넣어 정해진 형식으로 답장받는 방식으로 협업</p></div>
+    </div>
+    <div class="ways">
+      <div class="card"><b>1. 먼저 검증을 시킨다</b><p>엑셀·라벨·이미지 대조, 배경색 픽셀 감사를 AI에게 맡겼고, "검은 배경"이라는 메타데이터가 실제와 다르다는 걸 찾아냈습니다. 결과에는 "정말 맞나요?"를 다시 물었습니다.</p></div>
+      <div class="card"><b>2. 계획은 먼저, 실행은 승인 후</b><p>계획 모드로 단계를 세운 뒤 승인하고 실행했습니다. "스크립트만 쓰고 멈춰"처럼 AI가 할 범위를 좁혀서 맡겼습니다.</p></div>
+      <div class="card"><b>3. 언어의 벽을 AI로 넘는다</b><p>외국인 팀원과 일하며 한국어·영어·암하라어 가이드를 만들고, 팀원의 LLM이 그대로 읽고 답할 수 있는 요청서 형식을 썼습니다.</p></div>
+      <div class="card"><b>4. 기록과 재현성을 지킨다</b><p>노트북에 번호를 매겨 실험을 관리하고, 실수로 두 번 돌린 학습은 처음부터 다시 실행해 기록을 남겼습니다. 문서의 말투도 직접 다듬었습니다.</p></div>
+    </div>
+    <div class="card bars"><b style="color:var(--navy)">Cursor에서 PillCheck 관련 지시 약 570건, 어디에 썼나</b><p class="small" style="margin:2px 0 8px">2026년 8~10월, 대략적인 건수</p><div class="bar"><span>학습 코드·디버깅</span><i style="width:100%"></i><em>170</em></div><div class="bar"><span>앱 개발·빌드</span><i style="width:53%"></i><em>90</em></div><div class="bar"><span>데이터 확보·업로드</span><i style="width:47%"></i><em>80</em></div><div class="bar"><span>보고서·문서 작성</span><i style="width:29%"></i><em>50</em></div><div class="bar"><span>팀원 소통·번역</span><i style="width:24%"></i><em>40</em></div><div class="bar"><span>스토어 심사 준비</span><i style="width:24%"></i><em>40</em></div><div class="bar"><span>개념 학습</span><i style="width:18%"></i><em>30</em></div><div class="bar"><span>데이터 검증</span><i style="width:15%"></i><em>25</em></div></div>
+  </div>
+</section>
+
+<section id="team" style="background:#fff">
   <div class="wrap">
     <p class="kicker">TEAM</p>
     <h2>만든 사람들</h2>
