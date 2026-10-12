@@ -136,6 +136,24 @@ footer p+p{margin-top:6px}
   .poster img{max-width:300px;margin:0 auto;display:block}
   .btn{flex:1 1 100%;justify-content:center}
 }
+
+/* journey */
+.tl{position:relative;margin-top:8px;padding-left:28px}
+.tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:3px;border-radius:3px;background:linear-gradient(var(--blue),var(--teal))}
+.ev2{position:relative;margin-bottom:16px;padding:16px 18px}
+.ev2::before{content:"";position:absolute;left:-26px;top:20px;width:15px;height:15px;border-radius:50%;background:#fff;border:4px solid var(--blue)}
+.ev2.turn::before{border-color:var(--amber)}
+.ev2 .d{font-size:13px;font-weight:800;color:var(--blue);letter-spacing:.3px}
+.ev2.turn .d{color:var(--amber)}
+.ev2 h3{font-size:18px;color:var(--navy);margin:2px 0 4px}
+.ev2 p{font-size:15px;color:var(--ink)}
+.ev2 .why{margin-top:6px;font-size:14px;color:var(--muted)}
+.ev2 .why b{color:var(--navy)}
+.lessons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.lessons .card{padding:16px}
+.lessons b{display:block;color:var(--navy);margin-bottom:4px}
+.lessons p{font-size:14px;color:var(--muted)}
+@media (max-width:760px){.lessons{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -262,7 +280,40 @@ footer p+p{margin-top:6px}
   </div>
 </section>
 
-<section id="team" style="background:#fff">
+<section id="journey" style="background:#fff">
+  <div class="wrap">
+    <p class="kicker">JOURNEY</p>
+    <h2>어떻게 만들어졌나요</h2>
+    <p class="lead">2026년 7월부터 10월까지, 30종 시험에서 4,519종 앱까지의 과정입니다. <span style="color:var(--amber);font-weight:700">●</span> 표시는 방향을 바꾼 순간입니다.</p>
+    <div class="tl">
+      <div class="card ev2"><div class="d">2026년 7월</div><h3>주제 정하기: 알약 식별</h3>
+        <p>두 아이디어(알약 식별, CT 판독 보조) 가운데 결과물로 직접 보여 줄 수 있고, 공공데이터(AI Hub 경구약제 이미지, 식약처 DUR)를 쓸 수 있는 알약 식별을 골랐습니다. 7월 16일 산학 프로젝트 계획서를 냈습니다.</p></div>
+      <div class="card ev2"><div class="d">8월 초</div><h3>작게 시작하기: 30종부터</h3>
+        <p>원본 데이터가 5,000종, 수 TB에 이르러 먼저 모양·색이 뚜렷이 다른 일반의약품 30종(약 3.6만 장)으로 시작했습니다. 엑셀·라벨·이미지를 서로 대조해 30종 모두 일치하는지 검증했습니다.</p></div>
+      <div class="card ev2 turn"><div class="d">8월 중순 · 전환점</div><h3>99.97%를 의심하다</h3>
+        <p>첫 모델이 99.97%를 냈지만, 같은 알약을 회전하며 찍은 거의 똑같은 사진이 학습과 평가에 섞여 있었습니다. 촬영 세션 단위로 다시 나눠 <b>외운 점수가 아닌 정직한 점수</b>로 평가하기 시작했습니다.</p></div>
+      <div class="card ev2 turn"><div class="d">8월 말 · 전환점</div><h3>알약부터 찾고, 그다음 맞히기</h3>
+        <p>알약은 사진의 7%뿐이라 모델이 배경을 외우고 있었습니다. 알약을 먼저 찾는 검출기와 약을 맞히는 분류기, 두 단계로 바꿨습니다. 학습은 Elice Cloud GPU로 옮겼습니다.</p></div>
+      <div class="card ev2"><div class="d">9월 초</div><h3>글자로 한 번 더 확인</h3>
+        <p>생김새가 비슷한 약을 헷갈려서 알약에 새겨진 글자(각인)를 읽는 판독기를 직접 만들었습니다. 여러 모델 중 <b>2개 이상이 같은 약을 가리킬 때만</b> 결과를 내는 원칙이 이때 생겼습니다.</p></div>
+      <div class="card ev2 turn"><div class="d">9월 중순 · 전환점</div><h3>휴대폰 사진의 벽</h3>
+        <p>스튜디오 사진에서는 99%였지만 실제 휴대폰 사진은 크게 틀렸습니다. 그 뒤로 검출·전처리를 고치고, 촬영 가이드를 만들고, 확실하지 않으면 이름을 단정하지 않도록 바꿨습니다.</p></div>
+      <div class="card ev2"><div class="d">9월 중순 ~ 말</div><h3>30종에서 4,519종으로</h3>
+        <p>AI Hub 원본 전량(약 3.7TB, 알약 사진 약 261만 장)을 클라우드로 바로 옮겨 4,519종으로 확장했습니다. 여러 알약 동시 검출, 식약처 DUR 연동, 낱알식별 목록 2.5만여 종 각인 검색을 붙였습니다.</p></div>
+      <div class="card ev2"><div class="d">9월 말 ~ 10월 초</div><h3>앱으로 완성</h3>
+        <p>Flutter 앱을 1.0에서 1.2.x까지 다듬어 Google Play 비공개 테스트에 제출했습니다. 촬영 코치, 쉬운 말 안내, 다국어(한·영·일·중), 웹 버전을 더했고 코드 점검으로 버그를 정리했습니다.</p></div>
+      <div class="card ev2"><div class="d">10월</div><h3>발표와 전시</h3>
+        <p>산학 프로젝트 평가 발표에서 라이브로 시연했고, 10월 21일 대구·경북 모빌리티 취업박람회에 부스로 전시합니다. 다음 목표는 실제 휴대폰 사진으로 성능을 검증하는 것입니다.</p></div>
+    </div>
+    <div class="lessons">
+      <div class="card"><b>높은 점수는 먼저 의심한다</b><p>99.97%의 비밀은 데이터 누수였습니다. 평가를 다시 설계한 뒤에야 믿을 수 있는 숫자가 나왔습니다.</p></div>
+      <div class="card"><b>스튜디오 ≠ 현실</b><p>실험실 정확도는 실제 사진에서 그대로 나오지 않았습니다. 그래서 성능 표기에 측정 조건을 꼭 적습니다.</p></div>
+      <div class="card"><b>모르면 모른다고 말한다</b><p>건강과 관련된 서비스라, 틀린 약 이름보다 "다시 찍어 주세요"가 안전하다고 판단했습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
   <div class="wrap">
     <p class="kicker">TEAM</p>
     <h2>만든 사람들</h2>
