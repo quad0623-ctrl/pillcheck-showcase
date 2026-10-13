@@ -179,6 +179,9 @@ footer p+p{margin-top:6px}
 .bar i{display:block;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--blue),#5b8cff)}
 .bar em{font-style:normal;color:var(--muted);text-align:right}
 @media (max-width:760px){.split,.tools,.ways{grid-template-columns:1fr}.bar{grid-template-columns:110px 1fr 40px}}
+.play{margin-top:14px;max-width:100%;line-height:1.45;display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);background:var(--card);border-radius:16px;padding:7px 14px;box-shadow:0 4px 14px rgba(29,79,224,.08)}
+.play b{color:var(--navy)}
+.play .pd{width:8px;height:8px;border-radius:50%;background:#f5a524;flex:none}
 </style>
 </head>
 <body>
@@ -202,6 +205,7 @@ footer p+p{margin-top:6px}
           <div class="stat"><b>4,519종</b><span>사진만으로 바로 알아보는 약</span></div>
           <div class="stat"><b>25,000여 종</b><span>알약 글자·모양·색으로 찾는 약</span></div>
         </div>
+        <p class="play"><span class="pd"></span><span><b>Google Play</b> 비공개 테스트 완료 · 정식 출시(프로덕션) 승인 대기 중</span></p>
       </div>
       <div class="phones">
         <div class="phone"><img src="assets/screen_scan.jpg" alt="촬영 화면: 알약 3개를 찾아 번호를 붙인 모습"></div>
@@ -326,9 +330,9 @@ footer p+p{margin-top:6px}
       <div class="card ev2"><div class="d">9월 중순 ~ 말</div><h3>30종에서 4,519종으로</h3>
         <p>AI Hub 원본 전량(약 3.7TB, 알약 사진 약 261만 장)을 클라우드로 바로 옮겨 4,519종으로 확장했습니다. 여러 알약 동시 검출, 식약처 DUR 연동, 낱알식별 목록 2.5만여 종 각인 검색을 붙였습니다.</p></div>
       <div class="card ev2"><div class="d">9월 말 ~ 10월 초</div><h3>앱으로 완성</h3>
-        <p>Flutter 앱을 1.0에서 1.2.x까지 다듬어 Google Play 비공개 테스트에 제출했습니다. 촬영 코치, 쉬운 말 안내, 다국어(한·영·일·중), 웹 버전을 더했고 코드 점검으로 버그를 정리했습니다.</p></div>
+        <p>Flutter 앱을 1.0에서 1.2.x까지 다듬어 Google Play 비공개 테스트를 진행했습니다. 촬영 코치, 쉬운 말 안내, 다국어(한·영·일·중), 웹 버전을 더했고 코드 점검으로 버그를 정리했습니다.</p></div>
       <div class="card ev2"><div class="d">10월</div><h3>발표와 전시</h3>
-        <p>산학 프로젝트 평가 발표에서 라이브로 시연했고, 10월 21일 대구·경북 모빌리티 취업박람회에 부스로 전시합니다. 다음 목표는 실제 휴대폰 사진으로 성능을 검증하는 것입니다.</p></div>
+        <p>산학 프로젝트 평가 발표에서 라이브로 시연했고, 10월 21일 대구·경북 모빌리티 취업박람회에 부스로 전시합니다. Google Play 비공개 테스트 기간을 마치고 정식 출시(프로덕션) 승인을 기다리고 있습니다. 다음 목표는 실제 휴대폰 사진으로 성능을 검증하는 것입니다.</p></div>
     </div>
     <div class="lessons">
       <div class="card"><b>높은 점수는 먼저 의심한다</b><p>99.97%의 비밀은 데이터 누수였습니다. 평가를 다시 설계한 뒤에야 믿을 수 있는 숫자가 나왔습니다.</p></div>
