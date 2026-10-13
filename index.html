@@ -119,6 +119,11 @@ thead .pc{background:var(--blue);color:#fff;border-radius:10px 10px 0 0}
 .gh{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none;font-size:15px}
 .gh svg{width:18px;height:18px}
 
+.ct{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:8px}
+.ct a{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--ink);text-decoration:none;font-weight:600}
+.ct a:hover{color:var(--blue)}
+.ct svg{width:16px;height:16px;color:var(--blue);flex:none}
+
 /* poster + footer */
 .poster{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:center}
 .poster img{width:100%;border-radius:12px;box-shadow:0 12px 30px rgba(14,26,61,.18)}
@@ -199,7 +204,6 @@ footer p+p{margin-top:6px}
         <p class="sub"><b>필체크</b> · 사진 한 장으로 여러 알약을 한 번에 확인합니다</p>
         <div class="cta">
           <a class="btn primary" href="https://desktop-uv0oi23.tail58aa66.ts.net/ui" target="_blank" rel="noopener"><span class="dot"></span>라이브 데모 열기</a>
-          <a class="btn ghost" href="#team">만든 사람들</a>
         </div>
         <div class="stats">
           <div class="stat"><b>4,519종</b><span>사진만으로 바로 알아보는 약</span></div>
@@ -216,6 +220,28 @@ footer p+p{margin-top:6px}
 </header>
 
 <main>
+<section id="team" style="background:#fff">
+  <div class="wrap">
+    <p class="kicker">TEAM</p>
+    <h2>만든 사람들</h2>
+    <p class="lead">계명대학교 D5 청년인재 혁신아카데미 ABB 과정 · SD팀</p>
+    <div class="team">
+      <div class="card mem"><div class="av">D</div><div>
+        <h3>Dagmawe <span class="role">AI 엔진</span></h3>
+        <p>모델 설계·학습 → 앱 연동·추론 서버</p>
+        <div class="ct"><a href="tel:+82-10-2902-9805"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>010-2902-9805</a><a href="mailto:dagmawe73@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>dagmawe73@gmail.com</a></div>
+        <a class="gh" href="https://github.com/Dagim7" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>github.com/Dagim7</a>
+      </div></div>
+      <div class="card mem"><div class="av t">유</div><div>
+        <h3>유시안 <span class="role">플랫폼 · 프로덕트</span></h3>
+        <p>모델 학습 인프라·검증 → 앱 개발·디자인·배포</p>
+        <div class="ct"><a href="tel:+82-10-8313-1524"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>010-8313-1524</a><a href="mailto:quad0623@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>quad0623@gmail.com</a></div>
+        <a class="gh" href="https://github.com/quad0623-ctrl" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>github.com/quad0623-ctrl</a>
+      </div></div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <p class="kicker">WHY</p>
@@ -378,25 +404,6 @@ footer p+p{margin-top:6px}
   </div>
 </section>
 
-<section id="team" style="background:#fff">
-  <div class="wrap">
-    <p class="kicker">TEAM</p>
-    <h2>만든 사람들</h2>
-    <p class="lead">계명대학교 D5 청년인재 혁신아카데미 ABB 과정 · SD팀</p>
-    <div class="team">
-      <div class="card mem"><div class="av">D</div><div>
-        <h3>Dagmawe <span class="role">AI 엔진</span></h3>
-        <p>모델 설계·학습 → 앱 연동·추론 서버</p>
-        <a class="gh" href="https://github.com/Dagim7" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>github.com/Dagim7</a>
-      </div></div>
-      <div class="card mem"><div class="av t">유</div><div>
-        <h3>유시안 <span class="role">플랫폼 · 프로덕트</span></h3>
-        <p>학습 인프라 → 앱 개발·디자인·배포</p>
-        <a class="gh" href="https://github.com/quad0623-ctrl" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>github.com/quad0623-ctrl</a>
-      </div></div>
-    </div>
-  </div>
-</section>
 
 <section>
   <div class="wrap poster">
