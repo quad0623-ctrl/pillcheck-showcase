@@ -187,6 +187,9 @@ footer p+p{margin-top:6px}
 .play{margin-top:14px;max-width:100%;line-height:1.45;display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);background:var(--card);border-radius:16px;padding:7px 14px;box-shadow:0 4px 14px rgba(29,79,224,.08)}
 .play b{color:var(--navy)}
 .play .pd{width:8px;height:8px;border-radius:50%;background:#f5a524;flex:none}
+.plays{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px}
+.plays .play{margin-top:0}
+.play .pd.ios{background:#9aa6c2}
 </style>
 </head>
 <body>
@@ -209,7 +212,10 @@ footer p+p{margin-top:6px}
           <div class="stat"><b>4,519종</b><span>사진만으로 바로 알아보는 약</span></div>
           <div class="stat"><b>25,000여 종</b><span>알약 글자·모양·색으로 찾는 약</span></div>
         </div>
-        <p class="play"><span class="pd"></span><span><b>Google Play</b> 비공개 테스트 완료 · 정식 출시(프로덕션) 승인 대기 중</span></p>
+        <div class="plays">
+          <p class="play"><span class="pd"></span><span><b>Google Play</b> 비공개 테스트 완료 · 정식 출시(프로덕션) 승인 대기 중</span></p>
+          <p class="play"><span class="pd ios"></span><span><b>App Store</b> Flutter로 만들어 iOS 앱도 같은 코드로 빌드 가능 · Google Play 출시 후 검토 예정</span></p>
+        </div>
       </div>
       <div class="phones">
         <div class="phone"><img src="assets/screen_scan.jpg" alt="촬영 화면: 알약 3개를 찾아 번호를 붙인 모습"></div>
